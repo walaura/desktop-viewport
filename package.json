@@ -28,7 +28,7 @@
     "es6-promise": "^4.0.5",
     "eslint": "^3.16.1",
     "gulp-github-release": "^1.2.0",
-    "mocha": "^2.5.3",
+    "mocha": "^3.2.0",
     "mocha-phantomjs": "^4.1.0",
     "through2": "^2.0.3"
   },
