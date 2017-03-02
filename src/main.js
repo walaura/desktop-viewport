@@ -39,7 +39,7 @@ function start(settings){
 			$body.style.overflowX = 'hidden';
 			$body.style.willChange = 'transform';
 			$body.style.height = '100%';
-			
+
 			$container.style.transformOrigin = '0 0';
 
 			window.addEventListener('resize', ev => {
@@ -56,7 +56,7 @@ function start(settings){
 	const rescale = (width=settings.viewport) => {
 		settings.viewport = width;
 		$container.style.width = settings.viewport+'px';
-
+		$container.style.position = 'static';
 		let finishUp = () => {
 			if(document.readyState === 'complete') {
 				$container.style.height = $container.offsetHeight+'px';
@@ -64,6 +64,7 @@ function start(settings){
 				$container.style.overflow = 'hidden';
 			}
 		}
+		finishUp();
 		window.document.addEventListener('readystatechange', finishUp, false);
 	}
 
