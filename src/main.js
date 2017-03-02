@@ -39,7 +39,7 @@ function start(settings){
 			$body.style.overflowX = 'hidden';
 			$body.style.willChange = 'transform';
 			$body.style.height = '100%';
-			
+
 			$container.style.transformOrigin = '0 0';
 
 			window.addEventListener('resize', ev => {
@@ -56,14 +56,17 @@ function start(settings){
 	const rescale = (width=settings.viewport) => {
 		settings.viewport = width;
 		$container.style.width = settings.viewport+'px';
-
+		$container.style.height = 'auto';
+		$container.style.position = 'static';
 		let finishUp = () => {
 			if(document.readyState === 'complete') {
 				$container.style.height = $container.offsetHeight+'px';
 				$container.style.position = 'absolute';
 				$container.style.overflow = 'hidden';
+				window.dispatchEvent(new Event('resize'));
 			}
 		}
+		finishUp();
 		window.document.addEventListener('readystatechange', finishUp, false);
 	}
 
