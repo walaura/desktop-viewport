@@ -20,5 +20,6 @@ Grab the code from here or npm
     npm install
 
 
+& then
 
     import 'desktop-viewport';
