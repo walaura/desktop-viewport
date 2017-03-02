@@ -56,12 +56,14 @@ function start(settings){
 	const rescale = (width=settings.viewport) => {
 		settings.viewport = width;
 		$container.style.width = settings.viewport+'px';
+		$container.style.height = 'auto';
 		$container.style.position = 'static';
 		let finishUp = () => {
 			if(document.readyState === 'complete') {
 				$container.style.height = $container.offsetHeight+'px';
 				$container.style.position = 'absolute';
 				$container.style.overflow = 'hidden';
+				window.dispatchEvent(new Event('resize'));
 			}
 		}
 		finishUp();
