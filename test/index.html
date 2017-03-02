@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=1200, initial-scale=1">
+		<meta charset="utf-8">
+		<title>Desktop-viewport</title>
+		<script src="../node_modules/mocha/mocha.js"></script>
+		<script>mocha.setup('bdd');</script>
+		<script src="test.js"></script>
+		<script>
+			window.async = function(u, c){
+				var d = document, t = 'script',
+				  o = d.createElement(t),
+				  s = d.getElementsByTagName(t)[0];
+				o.src = u;
+				if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+				s.parentNode.insertBefore(o, s);
+			}
+			async(window.location.hash === '#local' ? '../dist/desktop-viewport.js':'../dist/desktop-viewport.min.js',function(){
+				mocha.run();
+			})
+		</script>
+		<style>
+		* {
+			margin: 0;
+			padding: 0;
+			display: block;
+			float: left;
+		}
+		head,script {
+			display: none;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div style="
+				padding: 100vh 1em;
+				text-align: center;
+				font-size: 3em;
+				width: 1200px;
+				background: aliceblue;
+			">
+				👁👄👁☝️
+			</div>
+			<div style="
+				padding: 100vh 1em;
+				text-align: center;
+				font-size: 3em;
+				width: 1200px;
+				background: red;
+			">
+				👁👄👁☝️
+			</div>
+			<div style="
+				padding: 100vh 1em;
+				text-align: center;
+				font-size: 3em;
+				width: 600px;
+				background: white;
+			">
+				👁👄👁☝️
+			</div>
+			<div style="
+				padding: 100vh 1em;
+				text-align: center;
+				font-size: 3em;
+				width: 600px;
+				background: black;
+			">
+				👁👄👁☝️
+			</div>
+			<div style="
+				padding: 100vh 1em;
+				text-align: center;
+				font-size: 3em;
+				width: 1200px;
+				background: limegreen;
+			">
+				👁👄👁☝️
+			</div>
+		</div>
+		<div id="mocha"></div>
+	</body>
+</html>

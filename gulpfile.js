@@ -7,7 +7,7 @@ const path = require('path');
 const fs = require('fs-extra');
 const WrapperPlugin = require('wrapper-webpack-plugin');
 
-const config = require('./src/conf.js');
+const config = require('./src/config.js');
 
 
 const webpackConfig = {
@@ -30,6 +30,10 @@ const webpackConfig = {
 	plugins: [
 		new webpack.webpack.ProvidePlugin({
 			Promise: 'es6-promise-promise'
+		}),
+		new WrapperPlugin({
+		  header: config.webpack.header,
+		  footer: `if(window.${config.webpack.library} && typeof window.${config.webpack.library} === 'function'){window.${config.webpack.library} = window.${config.webpack.library}()}`
 		})
 	]
 };
@@ -98,7 +102,7 @@ gulp.task('test', ['make'], function () {
 
 
 gulp.task('default', function() {
-	return gulp.src('src/app.js')
+	return gulp.src('src/main.js')
 		.pipe(webpack({
 			watch: true,
 			devtool: 'source-map',
@@ -119,7 +123,7 @@ gulp.task('default', function() {
 
 
 gulp.task('make', ['clean'], function() {
-	return gulp.src('src/app.js')
+	return gulp.src('src/main.js')
 		.pipe(webpack({
 			output: {
 				filename: config.webpack.filename.dist,
