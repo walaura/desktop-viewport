@@ -28,21 +28,24 @@ function start(settings){
 		}
 	}
 
-	const $body = document.querySelector(settings.container);
+	const $container = document.querySelector(settings.container);
+	const $body = document.querySelector('body');
 
 	let bound = false;
 
 	const bind = () => {
 		rescale();
 		if(!bound) {
-			document.querySelector('body').style.overflowX = 'hidden';
-			document.querySelector('body').style.willChange = 'transform';
-			$body.style.transformOrigin = '0 0';
+			$body.style.overflowX = 'hidden';
+			$body.style.willChange = 'transform';
+			$body.style.height = '100%';
+			
+			$container.style.transformOrigin = '0 0';
 
 			window.addEventListener('resize', ev => {
 				let originalScroll = window.scrollY/exportable.scaleMultiplier;
 				exportable.scaleMultiplier = window.innerWidth/settings.viewport;
-				$body.style.transform = `scale(${exportable.scaleMultiplier})`;
+				$container.style.transform = `scale(${exportable.scaleMultiplier})`;
 				window.scrollTo(window.scrollX,originalScroll*exportable.scaleMultiplier);
 			}, true);
 			window.dispatchEvent(new Event('resize'));
@@ -52,20 +55,20 @@ function start(settings){
 
 	const rescale = (width=settings.viewport) => {
 		settings.viewport = width;
-		$body.style.width = settings.viewport+'px';
+		$container.style.width = settings.viewport+'px';
 
 		let finishUp = () => {
 			if(document.readyState === 'complete') {
-				$body.style.height = $body.offsetHeight+'px';
-				$body.style.position = 'absolute';
-				$body.style.overflow = 'hidden';
+				$container.style.height = $container.offsetHeight+'px';
+				$container.style.position = 'absolute';
+				$container.style.overflow = 'hidden';
 			}
 		}
 		window.document.addEventListener('readystatechange', finishUp, false);
 	}
 
 	const exportable = {
-		scaleMultiplier: 1,
+		scaleMultiplier: window.innerWidth/settings.viewport,
 		bind: bind,
 		rescale: rescale
 	};
