@@ -28,9 +28,6 @@ const webpackConfig = {
 		extensions: ['', '.js', '.jsx']
 	},
 	plugins: [
-		new webpack.webpack.ProvidePlugin({
-			Promise: 'es6-promise-promise'
-		}),
 		new WrapperPlugin({
 		  header: config.webpack.header,
 		  footer: `if(window.${config.webpack.library} && typeof window.${config.webpack.library} === 'function'){window.${config.webpack.library} = window.${config.webpack.library}()}`
