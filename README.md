@@ -5,7 +5,8 @@ Hastily makes desktop browsers respect the viewport setting so they'll scale up 
 ## Usage (browser)
 Grab the [latest release](https://github.com/walaura/desktop-viewport/releases) and drop it in as a script tag.
 
-Just add it to your page, wrap everything on a div id'd #container` and have a viewport tag on your `head`. Check `test/index.html` for an example.
+Just add it to your page, wrap everything on a div id'd `#container` and have a viewport tag on `<head>`.
+Check `test/index.html` for an example!!
 
 
 ## Usage (webpack+babel)
