@@ -1,7 +1,7 @@
 # desktop-viewport
 Hastily makes desktop browsers respect the viewport setting so they'll scale up and down everything to a given window size
 
-<div align="center"><img src="https://i.imgur.com/wPW8HWi.gif"></div>
+<div align="center"><img width="100%" src="https://fat.gfycat.com/KaleidoscopicFelineBrant.gif"></div>
 
 
 ## Usage (browser)
