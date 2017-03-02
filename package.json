@@ -48,7 +48,6 @@
   "scripts": {
     "gulp": "./node_modules/.bin/gulp",
     "install": "gulp make",
-    "release": "npm publish && npm install && gulp release",
-    "test": "gulp test"
+    "release": "npm publish && npm install && gulp release"
   }
 }

@@ -1,5 +1,11 @@
 # desktop-viewport
-Hastily makes desktop browsers respect the viewport setting
+Hastily makes desktop browsers respect the viewport setting so they'll scale up and down everything to a given window size
+
+
+## Usage (browser)
+Grab the [latest release](https://github.com/walaura/desktop-viewport/releases) and drop it in as a script tag.
+
+Just add it to your page, wrap everything on a div id'd #container` and have a viewport tag on your `head`. Check `test/index.html` for an example.
 
 
 ## Usage (webpack+babel)
@@ -14,6 +20,4 @@ Grab the code from here or npm
 
 
 
-
-## Usage (browser)
-Grab the [latest release](https://github.com/walaura/desktop-viewport/releases) and drop it in as a script tag. `window.desktopViewport` will appear
+    import 'desktop-viewport';
