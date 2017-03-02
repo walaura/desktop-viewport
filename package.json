@@ -25,11 +25,12 @@
     "wrapper-webpack-plugin": "0.1.11"
   },
   "devDependencies": {
+    "es6-promise": "^4.0.5",
+    "eslint": "^3.16.1",
     "gulp-github-release": "^1.2.0",
     "mocha": "^2.5.3",
     "mocha-phantomjs": "^4.1.0",
-    "through2": "^2.0.3",
-    "es6-promise": "^4.0.5"
+    "through2": "^2.0.3"
   },
   "keywords": [
     "responsive",
@@ -45,8 +46,10 @@
   },
   "scripts": {
     "gulp": "./node_modules/.bin/gulp",
+    "eslint": "./node_modules/.bin/eslint",
     "install": "gulp make",
     "release": "npm publish && npm install && gulp release",
-    "test": "gulp test"
+    "test": "gulp test",
+    "eslint": "eslint --ignore-path .gitignore ."
   }
 }

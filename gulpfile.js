@@ -29,8 +29,8 @@ const webpackConfig = {
 	},
 	plugins: [
 		new WrapperPlugin({
-		  header: config.webpack.header,
-		  footer: `if(window.${config.webpack.library} && typeof window.${config.webpack.library} === 'function'){window.${config.webpack.library} = window.${config.webpack.library}()}`
+			header: config.webpack.header,
+			footer: `if(window.${config.webpack.library} && typeof window.${config.webpack.library} === 'function'){window.${config.webpack.library} = window.${config.webpack.library}()}`
 		})
 	]
 };
@@ -40,7 +40,7 @@ gulp.task('clean', () => {
 	['dist','temp','temp/screenshots'].map((dir)=>{
 		fs.removeSync(dir);
 		fs.mkdirSync(dir);
-	})
+	});
 });
 
 
@@ -76,7 +76,7 @@ gulp.task('test', ['make'], function () {
 			if(uploadCount >= screenshots.length) {
 				cb(null, chunk);
 			}
-		}
+		};
 
 		screenshots.map((screenshot)=>{
 
@@ -88,13 +88,13 @@ gulp.task('test', ['make'], function () {
 			]);
 
 			child.stdout.on('data', (buffer) => {
-				gutil.log('Look at it!!!', gutil.colors.magenta(buffer.toString().replace("\n",'')));
+				gutil.log('Look at it!!!', gutil.colors.magenta(buffer.toString().replace('\n','')));
 			});
 			child.stdout.on('end', isDoneMaybe);
 
 		});
 
-	}))
+	}));
 });
 
 
@@ -114,7 +114,7 @@ gulp.task('default', function() {
 				root: path.resolve('./src')
 			}
 		}))
-		.pipe(header(config.webpack.header+"\n"))
+		.pipe(header(config.webpack.header+'\n'))
 		.pipe(gulp.dest('dist/'));
 });
 
@@ -134,9 +134,9 @@ gulp.task('make', ['clean'], function() {
 			}
 		}))
 		.pipe(uglify())
-		.pipe(header(config.webpack.header+"\n"))
-		.pipe(gulp.dest('dist/'))
-})
+		.pipe(header(config.webpack.header+'\n'))
+		.pipe(gulp.dest('dist/'));
+});
 
 
 gulp.task('release', function(){
@@ -147,7 +147,8 @@ gulp.task('release', function(){
 		.pipe(release({
 			manifest: require('./package.json')
 		}).on('error',function(e){
+			console.log(e);
 			this.emit('end');
-		}))
+		}));
 
 });
