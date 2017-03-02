@@ -36,10 +36,14 @@ function start(settings){
 		rescale();
 		if(!bound) {
 			document.querySelector('body').style.overflowX = 'hidden';
+			document.querySelector('body').style.willChange = 'transform';
 			$body.style.transformOrigin = '0 0';
+
 			window.addEventListener('resize', ev => {
+				let originalScroll = window.scrollY/exportable.scaleMultiplier;
 				exportable.scaleMultiplier = window.innerWidth/settings.viewport;
 				$body.style.transform = `scale(${exportable.scaleMultiplier})`;
+				window.scrollTo(window.scrollX,originalScroll*exportable.scaleMultiplier);
 			}, true);
 			window.dispatchEvent(new Event('resize'));
 		}
