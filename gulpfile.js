@@ -3,7 +3,7 @@ const gutil = require('gulp-util');
 const webpack = require('webpack');
 const fs = require('fs-extra');
 
-const config = require('./src/config.js');
+const config = require('./config.bundle.js');
 
 
 gulp.task('clean', () => {
@@ -82,8 +82,8 @@ gulp.task('release', function(){
 	const release = require('gulp-github-release');
 
 	return gulp.src([
-		'dist/'+config.webpack.bundle,
-		'dist/'+config.webpack.bundleMinified
+		'dist/'+config.filename.default,
+		'dist/'+config.filename.min
 	])
 		.pipe(release({
 			manifest: require('./package.json')
