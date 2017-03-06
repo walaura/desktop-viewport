@@ -1,6 +1,7 @@
 import config from 'config';
-
 import documentReady from 'document-ready-promise';
+
+
 
 function start(settings){
 
@@ -18,10 +19,9 @@ function start(settings){
 		let viewportWidth = document.querySelector('meta[name=viewport]').content
 			.split(',')
 			.map(prop => prop.trim().split('='))
-			.filter(prop => prop[0] === 'width')
-			[0]
+			.filter(prop => prop[0] === 'width')[0];
 		if(viewportWidth && viewportWidth[1] && !isNaN(parseInt(viewportWidth[1]))) {
-			settings.viewport = parseInt(viewportWidth[1])
+			settings.viewport = parseInt(viewportWidth[1]);
 		}
 		else {
 			settings.viewport = 960;
@@ -34,7 +34,14 @@ function start(settings){
 	let bound = false;
 
 	const bind = () => {
+		
+		/*this device is already scaling natively*/
+		if(window.innerWidth !== window.screen.width) {
+			return;
+		}
+		
 		rescale();
+		
 		if(!bound) {
 			$body.style.overflowX = 'hidden';
 			$body.style.willChange = 'transform';
@@ -42,7 +49,7 @@ function start(settings){
 
 			$container.style.transformOrigin = '0 0';
 
-			window.addEventListener('resize', ev => {
+			window.addEventListener('resize', () => {
 				let originalScroll = window.scrollY/exportable.scaleMultiplier;
 				exportable.scaleMultiplier = window.innerWidth/settings.viewport;
 				$container.style.transform = `scale(${exportable.scaleMultiplier})`;
@@ -51,7 +58,7 @@ function start(settings){
 			window.dispatchEvent(new Event('resize'));
 		}
 		bound = true;
-	}
+	};
 
 	const rescale = (width=settings.viewport) => {
 		settings.viewport = width;
@@ -65,10 +72,10 @@ function start(settings){
 				$container.style.overflow = 'hidden';
 				window.dispatchEvent(new Event('resize'));
 			}
-		}
+		};
 		finishUp();
 		window.document.addEventListener('readystatechange', finishUp, false);
-	}
+	};
 
 	const exportable = {
 		scaleMultiplier: window.innerWidth/settings.viewport,
@@ -77,7 +84,7 @@ function start(settings){
 	};
 
 	if(settings.autoLoad) {
-		documentReady().then(bind)
+		documentReady().then(bind);
 	}
 
 	return exportable;

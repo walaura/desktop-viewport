@@ -10,4 +10,4 @@ module.exports = {
 		viewport: 'viewport',
 		autoLoad: true
 	}
-}
+};
