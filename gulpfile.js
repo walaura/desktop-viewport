@@ -22,11 +22,10 @@ gulp.task('test', function () {
 	return gulp
 	.src('test/index.html')
 	.pipe(mochaPhantomJS({
-		reporter: 'nyan',
 		suppressStderr: false,
 		phantomjs: {
 			viewportSize: {
-				width: 1440,
+				width: 2400,
 				height: 900
 			},
 			settings: {

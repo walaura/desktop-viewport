@@ -55,7 +55,6 @@ function start(settings){
 			$container.style.transformOrigin = '0 0';
 
 			window.addEventListener('resize', () => {
-				console.log(window.innerWidth);
 				let originalScroll = window.scrollY/exportable.scaleMultiplier;
 				exportable.scaleMultiplier = window.innerWidth/settings.viewport;
 				$container.style.transform = `scale(${exportable.scaleMultiplier})`;
