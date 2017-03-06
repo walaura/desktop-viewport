@@ -1,4 +1,4 @@
-import config from 'config';
+import config from './config.js';
 import documentReady from 'document-ready-promise';
 
 

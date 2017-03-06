@@ -18,11 +18,7 @@ let webpackConfig = {
 		rules: [
 			{
 				test: /.js?$/,
-				loader: 'babel-loader',
-				query: {
-					presets: ['env'],
-					plugins: ['transform-object-assign']
-				}
+				loader: 'babel-loader'
 			}
 		]
 	},
