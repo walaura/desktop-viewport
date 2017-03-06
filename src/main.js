@@ -48,9 +48,11 @@ function start(settings){
 		rescale();
 
 		if(!bound) {
-			$body.style.overflowX = 'hidden';
-			$body.style.willChange = 'transform';
-			$body.style.height = '100%';
+			$body.style.overflowX = 'hidden';			
+			if(settings.extraOptimization) {
+				$body.style.willChange = 'transform';
+				$body.style.height = '100%';
+			}
 
 			$container.style.transformOrigin = '0 0';
 
