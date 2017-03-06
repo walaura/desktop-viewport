@@ -3,7 +3,7 @@ const gutil = require('gulp-util');
 const webpack = require('webpack');
 const fs = require('fs-extra');
 
-const config = require('./src/config.js');
+const config = require('./config/bundle.js');
 
 
 gulp.task('clean', () => {
@@ -22,11 +22,10 @@ gulp.task('test', function () {
 	return gulp
 	.src('test/index.html')
 	.pipe(mochaPhantomJS({
-		reporter: 'nyan',
 		suppressStderr: false,
 		phantomjs: {
 			viewportSize: {
-				width: 1440,
+				width: 2400,
 				height: 900
 			},
 			settings: {
@@ -82,8 +81,8 @@ gulp.task('release', function(){
 	const release = require('gulp-github-release');
 
 	return gulp.src([
-		'dist/'+config.webpack.bundle,
-		'dist/'+config.webpack.bundleMinified
+		'dist/'+config.filename.default,
+		'dist/'+config.filename.min
 	])
 		.pipe(release({
 			manifest: require('./package.json')

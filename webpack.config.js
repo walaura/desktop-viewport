@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const config = require('./src/config.js');
+const config = require('./config/bundle.js');
 
 const WrapperPlugin = require('wrapper-webpack-plugin');
 
@@ -10,8 +10,8 @@ let webpackConfig = {
 	devtool: 'source-map',
 	output: {
 		path: './dist',
-		filename: config.webpack.bundle,
-		library: config.webpack.library,
+		filename: config.filename.default,
+		library: config.library,
 		libraryTarget: 'umd'
 	},
 	module: {
@@ -32,10 +32,10 @@ let webpackConfig = {
 	},
 	plugins: [
 		new WrapperPlugin({
-			footer: `if(window.${config.webpack.library} && typeof window.${config.webpack.library} === 'function'){window.${config.webpack.library} = window.${config.webpack.library}()}`
+			footer: `if(window.${config.library} && typeof window.${config.library} === 'function'){window.${config.library} = window.${config.library}()}`
 		}),
 		new webpack.BannerPlugin(
-			config.webpack.banner
+			config.banner
 		)
 	]
 };
