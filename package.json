@@ -20,7 +20,7 @@
     "gulp-uglify": "^2.0.1",
     "gulp-util": "^3.0.8",
     "promise-polyfill": "^6.0.2",
-    "webpack": "^1.13.1",
+    "webpack": "^2.2.1",
     "webpack-stream": "^3.2.0",
     "wrapper-webpack-plugin": "0.1.11"
   },
@@ -46,10 +46,9 @@
   },
   "scripts": {
     "gulp": "./node_modules/.bin/gulp",
-    "eslint": "./node_modules/.bin/eslint",
+    "eslint": "eslint --ignore-path .gitignore .",
     "install": "gulp make",
     "release": "npm publish && npm install && gulp release",
-    "test": "gulp test",
-    "eslint": "eslint --ignore-path .gitignore ."
+    "test": "gulp test"
   }
 }
