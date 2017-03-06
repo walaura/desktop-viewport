@@ -34,7 +34,14 @@ function start(settings){
 	let bound = false;
 
 	const bind = () => {
+		
+		/*this device is already scaling natively*/
+		if(window.innerWidth !== window.screen.width) {
+			return;
+		}
+		
 		rescale();
+		
 		if(!bound) {
 			$body.style.overflowX = 'hidden';
 			$body.style.willChange = 'transform';
