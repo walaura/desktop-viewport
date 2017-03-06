@@ -34,14 +34,19 @@ function start(settings){
 	let bound = false;
 
 	const bind = () => {
-		
+
 		/*this device is already scaling natively*/
-		if(window.innerWidth !== window.screen.width) {
+		if(window.innerWidth === settings.viewport) {
+			let recheck = () => {
+				window.removeEventListener('resize', recheck, false);
+				bind();
+			}
+			window.addEventListener('resize', recheck, false);
 			return;
 		}
-		
+
 		rescale();
-		
+
 		if(!bound) {
 			$body.style.overflowX = 'hidden';
 			$body.style.willChange = 'transform';
@@ -50,6 +55,7 @@ function start(settings){
 			$container.style.transformOrigin = '0 0';
 
 			window.addEventListener('resize', () => {
+				console.log(window.innerWidth);
 				let originalScroll = window.scrollY/exportable.scaleMultiplier;
 				exportable.scaleMultiplier = window.innerWidth/settings.viewport;
 				$container.style.transform = `scale(${exportable.scaleMultiplier})`;

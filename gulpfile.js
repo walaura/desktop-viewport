@@ -111,7 +111,10 @@ gulp.task('release', function(){
 
 	const release = require('gulp-github-release');
 
-	return gulp.src('dist/'+config.webpack.filename.dist)
+	return gulp.src([
+		'dist/'+config.webpack.bundle.
+		'dist/'+config.webpack.bundleMinified
+	])
 		.pipe(release({
 			manifest: require('./package.json')
 		}).on('error',function(e){
