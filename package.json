@@ -47,8 +47,8 @@
   "scripts": {
     "install": "npm run make",
     "lint": "eslint --ignore-path .gitignore .",
-    "make": "webpack && webpack --config webpack.config.min.js",
+    "make": "gulp clean && webpack && webpack --config webpack.config.min.js",
     "release": "npm publish && npm install && gulp release",
-    "test": "gulp test"
+    "test": "npm run make && gulp test"
   }
 }

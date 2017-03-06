@@ -14,7 +14,7 @@ gulp.task('clean', () => {
 });
 
 
-gulp.task('test', ['webpack'], function () {
+gulp.task('test', function () {
 
 	const through = require('through2');
 	const mochaPhantomJS = require('gulp-mocha-phantomjs');
