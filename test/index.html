@@ -17,7 +17,7 @@
 				if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
 				s.parentNode.insertBefore(o, s);
 			}
-			async(window.location.hash === '#local' ? '../dist/desktop-viewport.js':'../dist/desktop-viewport.min.js',function(){
+			async(window.location.hash === '#local' ? '../dist/desktop-viewport.nomin.js':'../dist/desktop-viewport.js',function(){
 				mocha.run();
 			})
 		</script>

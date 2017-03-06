@@ -12,7 +12,7 @@ const config = require('./src/config.js');
 
 const webpackConfig = {
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /.js?$/,
 				loader: 'babel-loader',
@@ -24,7 +24,7 @@ const webpackConfig = {
 		]
 	},
 	resolve: {
-		modulesDirectories: ['node_modules', 'bower_components'],
+		modules: ['node_modules', 'bower_components'],
 		extensions: ['', '.js', '.jsx']
 	},
 	plugins: [
@@ -44,7 +44,7 @@ gulp.task('clean', () => {
 });
 
 
-gulp.task('test', ['make'], function () {
+gulp.task('test', ['webpack'], function () {
 
 	const through = require('through2');
 	const mochaPhantomJS = require('gulp-mocha-phantomjs');
@@ -98,45 +98,13 @@ gulp.task('test', ['make'], function () {
 });
 
 
-gulp.task('default', function() {
-	return gulp.src('src/main.js')
-		.pipe(webpack({
-			watch: true,
-			devtool: 'source-map',
-			output: {
-				filename: config.webpack.filename.dev,
-				library: config.webpack.library,
-				libraryTarget: 'umd'
-			},
-			plugins: webpackConfig.plugins,
-			module: webpackConfig.module,
-			resolve: {
-				root: path.resolve('./src')
-			}
-		}))
-		.pipe(header(config.webpack.header+"\n"))
-		.pipe(gulp.dest('dist/'));
+gulp.task('webpack', function(done) {
+	webpack(require('./webpack.config.js'),(err,stats)=>{
+		if(err) throw new gutil.PluginError('webpack', err);
+		gutil.log('[webpack]', stats.toString());
+		done();
+	});
 });
-
-
-gulp.task('make', ['clean'], function() {
-	return gulp.src('src/main.js')
-		.pipe(webpack({
-			output: {
-				filename: config.webpack.filename.dist,
-				library: config.webpack.library,
-				libraryTarget: 'umd'
-			},
-			plugins: webpackConfig.plugins,
-			module: webpackConfig.module,
-			resolve: {
-				root: path.resolve('./src')
-			}
-		}))
-		.pipe(uglify())
-		.pipe(header(config.webpack.header+"\n"))
-		.pipe(gulp.dest('dist/'))
-})
 
 
 gulp.task('release', function(){
