@@ -46,7 +46,7 @@
     "url": "https://github.com/walaura/desktop-viewport"
   },
   "scripts": {
-    "install": "make",
+    "install": "npm run make",
     "lint": "eslint --ignore-path .gitignore .",
     "make": "webpack && webpack --config webpack.config.min.js",
     "release": "npm publish && npm install && gulp release",
