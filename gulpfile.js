@@ -1,6 +1,6 @@
 const gulp = require('gulp');
 const gutil = require('gulp-util');
-const webpack = require('webpack-stream');
+const webpack = require('webpack');
 const fs = require('fs-extra');
 
 const config = require('./src/config.js');

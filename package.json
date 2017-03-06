@@ -1,7 +1,7 @@
 {
   "name": "desktop-viewport",
   "description": "Hastily makes desktop browsers respect the viewport setting",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "Laura mayhem",
   "bugs": {
     "url": "https://github.com/walaura/desktop-viewport/issues",
@@ -22,7 +22,6 @@
     "gulp-util": "^3.0.8",
     "promise-polyfill": "^6.0.2",
     "webpack": "^2.2.1",
-    "webpack-stream": "^3.2.0",
     "wrapper-webpack-plugin": "0.1.11"
   },
   "devDependencies": {
@@ -35,10 +34,10 @@
     "webpack-merge": "^3.0.0"
   },
   "keywords": [
-    "responsive",
     "es6",
     "frontend",
-    "javascript"
+    "javascript",
+    "responsive"
   ],
   "license": "MIT",
   "main": "./dist/desktop-viewport.min.js",
@@ -47,10 +46,10 @@
     "url": "https://github.com/walaura/desktop-viewport"
   },
   "scripts": {
-    "make": "webpack && webpack --config webpack.config.min.js",
     "install": "make",
+    "lint": "eslint --ignore-path .gitignore .",
+    "make": "webpack && webpack --config webpack.config.min.js",
     "release": "npm publish && npm install && gulp release",
-    "test": "gulp test",
-    "lint": "eslint --ignore-path .gitignore ."
+    "test": "gulp test"
   }
 }
