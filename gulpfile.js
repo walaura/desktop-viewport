@@ -3,7 +3,7 @@ const gutil = require('gulp-util');
 const webpack = require('webpack');
 const fs = require('fs-extra');
 
-const config = require('./config.bundle.js');
+const config = require('./config/bundle.js');
 
 
 gulp.task('clean', () => {
