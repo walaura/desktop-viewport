@@ -36,7 +36,7 @@ function start(settings){
 	const bind = () => {
 
 		/*this device is already scaling natively*/
-		if(window.innerWidth === settings.viewport) {
+		if(document.body.clientWidth === settings.viewport) {
 			let recheck = () => {
 				window.removeEventListener('resize', recheck, false);
 				bind();
