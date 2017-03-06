@@ -1,11 +1,9 @@
 module.exports = {
 	webpack: {
-		header: '/* 🗜 desktop-viewport 🗜 – https://github.com/walaura/desktop-viewport  */',
+		banner: '🗜 desktop-viewport 🗜 – https://github.com/walaura/desktop-viewport',
 		library: 'desktopViewport',
-		filename: {
-			dist: 'desktop-viewport.min.js',
-			dev: 'desktop-viewport.js'
-		}
+		bundle: 'desktop-viewport.js',
+		bundleMinified: 'desktop-viewport.min.js'
 	},
 	defaults: {
 		container: '#container',

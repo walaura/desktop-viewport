@@ -1,39 +1,9 @@
 const gulp = require('gulp');
 const gutil = require('gulp-util');
-const webpack = require('webpack-stream');
-const uglify = require('gulp-uglify');
-const header = require('gulp-header');
-const path = require('path');
+const webpack = require('webpack');
 const fs = require('fs-extra');
-const WrapperPlugin = require('wrapper-webpack-plugin');
 
 const config = require('./src/config.js');
-
-
-const webpackConfig = {
-	module: {
-		loaders: [
-			{
-				test: /.js?$/,
-				loader: 'babel-loader',
-				query: {
-					presets: ['es2015'],
-					plugins: ['transform-object-assign']
-				}
-			}
-		]
-	},
-	resolve: {
-		modulesDirectories: ['node_modules', 'bower_components'],
-		extensions: ['', '.js', '.jsx']
-	},
-	plugins: [
-		new WrapperPlugin({
-			header: config.webpack.header,
-			footer: `if(window.${config.webpack.library} && typeof window.${config.webpack.library} === 'function'){window.${config.webpack.library} = window.${config.webpack.library}()}`
-		})
-	]
-};
 
 
 gulp.task('clean', () => {
@@ -44,7 +14,7 @@ gulp.task('clean', () => {
 });
 
 
-gulp.task('test', ['make'], function () {
+gulp.task('test', function () {
 
 	const through = require('through2');
 	const mochaPhantomJS = require('gulp-mocha-phantomjs');
@@ -98,44 +68,12 @@ gulp.task('test', ['make'], function () {
 });
 
 
-gulp.task('default', function() {
-	return gulp.src('src/main.js')
-		.pipe(webpack({
-			watch: true,
-			devtool: 'source-map',
-			output: {
-				filename: config.webpack.filename.dev,
-				library: config.webpack.library,
-				libraryTarget: 'umd'
-			},
-			plugins: webpackConfig.plugins,
-			module: webpackConfig.module,
-			resolve: {
-				root: path.resolve('./src')
-			}
-		}))
-		.pipe(header(config.webpack.header+'\n'))
-		.pipe(gulp.dest('dist/'));
-});
-
-
-gulp.task('make', ['clean'], function() {
-	return gulp.src('src/main.js')
-		.pipe(webpack({
-			output: {
-				filename: config.webpack.filename.dist,
-				library: config.webpack.library,
-				libraryTarget: 'umd'
-			},
-			plugins: webpackConfig.plugins,
-			module: webpackConfig.module,
-			resolve: {
-				root: path.resolve('./src')
-			}
-		}))
-		.pipe(uglify())
-		.pipe(header(config.webpack.header+'\n'))
-		.pipe(gulp.dest('dist/'));
+gulp.task('webpack', function(done) {
+	webpack(require('./webpack.config.js'),(err,stats)=>{
+		if(err) throw new gutil.PluginError('webpack', err);
+		gutil.log('[webpack]', stats.toString());
+		done();
+	});
 });
 
 
@@ -143,7 +81,10 @@ gulp.task('release', function(){
 
 	const release = require('gulp-github-release');
 
-	return gulp.src('dist/'+config.webpack.filename.dist)
+	return gulp.src([
+		'dist/'+config.webpack.bundle,
+		'dist/'+config.webpack.bundleMinified
+	])
 		.pipe(release({
 			manifest: require('./package.json')
 		}).on('error',function(e){
