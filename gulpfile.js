@@ -1,39 +1,9 @@
 const gulp = require('gulp');
 const gutil = require('gulp-util');
 const webpack = require('webpack-stream');
-const uglify = require('gulp-uglify');
-const header = require('gulp-header');
-const path = require('path');
 const fs = require('fs-extra');
-const WrapperPlugin = require('wrapper-webpack-plugin');
 
 const config = require('./src/config.js');
-
-
-const webpackConfig = {
-	module: {
-		rules: [
-			{
-				test: /.js?$/,
-				loader: 'babel-loader',
-				query: {
-					presets: ['es2015'],
-					plugins: ['transform-object-assign']
-				}
-			}
-		]
-	},
-	resolve: {
-		modules: ['node_modules', 'bower_components'],
-		extensions: ['', '.js', '.jsx']
-	},
-	plugins: [
-		new WrapperPlugin({
-			header: config.webpack.header,
-			footer: `if(window.${config.webpack.library} && typeof window.${config.webpack.library} === 'function'){window.${config.webpack.library} = window.${config.webpack.library}()}`
-		})
-	]
-};
 
 
 gulp.task('clean', () => {
@@ -112,7 +82,7 @@ gulp.task('release', function(){
 	const release = require('gulp-github-release');
 
 	return gulp.src([
-		'dist/'+config.webpack.bundle.
+		'dist/'+config.webpack.bundle,
 		'dist/'+config.webpack.bundleMinified
 	])
 		.pipe(release({

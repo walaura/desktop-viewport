@@ -1,6 +1,6 @@
 const webpack = require('webpack');
-
 const config = require('./src/config.js');
+
 const WrapperPlugin = require('wrapper-webpack-plugin');
 
 let webpackConfig = {

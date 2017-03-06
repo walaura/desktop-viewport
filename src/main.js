@@ -40,7 +40,7 @@ function start(settings){
 			let recheck = () => {
 				window.removeEventListener('resize', recheck, false);
 				bind();
-			}
+			};
 			window.addEventListener('resize', recheck, false);
 			return;
 		}
