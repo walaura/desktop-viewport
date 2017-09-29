@@ -9,7 +9,7 @@ let webpackConfig = {
 	},
 	devtool: 'source-map',
 	output: {
-		path: './dist',
+		path: path.join(__dirname,'dist'),
 		filename: config.filename.default,
 		library: config.library,
 		libraryTarget: 'umd'
