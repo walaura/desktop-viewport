@@ -19,7 +19,8 @@
     "gulp-util": "^3.0.8",
     "webpack": "^2.2.1",
     "wrapper-webpack-plugin": "0.1.11",
-    "webpack-merge": "^3.0.0"
+    "webpack-merge": "^3.0.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "eslint": "^3.16.1",
@@ -45,6 +46,9 @@
     "lint": "eslint --ignore-path .gitignore .",
     "make": "gulp clean && webpack && webpack --config webpack.min.config.js",
     "release": "npm publish && npm install && gulp release",
-    "test": "npm run make && gulp test"
-  }
+    "test": "npm run make && gulp test",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
